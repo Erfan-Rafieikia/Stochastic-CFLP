@@ -20,7 +20,7 @@ The **Stochastic Capacitated Facility Location Problem (CFLP)** is a fundamental
 
 #### **Sets and Parameters**  
 
-- $ I $: Set of customers.  
+- $I$: Set of customers.  
 - $ J $: Set of candidate facility locations.  
 - $ S $: Set of demand scenarios.  
 - $ f_j $: Fixed cost of opening a facility at location $ j \in J $.  
