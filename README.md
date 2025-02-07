@@ -37,26 +37,26 @@ The **Stochastic Capacitated Facility Location Problem (CFLP)** is a fundamental
 
 The objective is to **minimize the total cost**, including **fixed facility costs** and **expected transportation costs**:  
 
-'''math 
+```math
 \text{minimize} \quad \sum_{j \in J} f_j y_j + \frac{1}{|S|} \sum_{i \in I} \sum_{j \in J} c_{ij} x_{ij,s}
-''' 
+```
 
 #### **Constraints**  
 
 - **Demand satisfaction:** Every customer's demand must be met.  
-'''math 
+```math
 \sum_{j \in J} x_{ij,s} \geq d_{i,s},\quad \forall i \in I, \forall s \in S
-''' 
+```
 
 - **Capacity constraint:** Each facility cannot exceed its capacity if opened.  
-'''math 
+```math
 \sum_{i \in I} x_{ij,s} \leq u_j y_j, \quad \forall j \in J, \forall s \in S
-''' 
+```
 
 - **Variable domains:**  
-'''math 
+```math
 x_{ij,s} \geq 0, \quad y_j \in \{0, 1\}
-'''
+```
 
 ---
 
