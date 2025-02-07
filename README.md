@@ -20,18 +20,18 @@ The **Stochastic Capacitated Facility Location Problem (CFLP)** is a fundamental
 
 #### **Sets and Parameters**  
 
-- $ I $: Set of customers.  
-- $ J $: Set of candidate facility locations.  
-- $ S $: Set of demand scenarios.  
-- $ f_j $: Fixed cost of opening a facility at location $ j \in J $.  
-- $ c_{ij} $: Transportation cost per unit from facility $ j $ to customer $ i $.  
-- $ d_{i,s} $: Demand of customer $ i $ under scenario $ s $.  
-- $ u_j $: Capacity of facility $ j $.  
+- $I$: Set of customers.  
+- $J$: Set of candidate facility locations.  
+- $S$: Set of demand scenarios.  
+- $fj $: Fixed cost of opening a facility at location $j \in J$.  
+- $c_{ij}$: Transportation cost per unit from facility $j$ to customer $i$.  
+- $d_{i,s}$: Demand of customer $i$ under scenario $s$.  
+- $u_j$: Capacity of facility $j$.  
 
 #### **Decision Variables**  
 
-- $ x_{ij,s} $: Amount of demand from customer $ i $ served by facility $ j $ in scenario $ s $.  
-- $ y_j $: Binary variable indicating whether facility $ j $ is open $ 1 $ or closed $ 0 $  
+- $x_{ij,s}$: Amount of demand from customer $i$ served by facility $j$ in scenario $s$.  
+- $y_j$: Binary variable indicating whether facility $j$ is open $1$ or closed $0$  
 
 #### **Objective Function**  
 
@@ -73,14 +73,14 @@ The process continues **iteratively**, refining decisions until convergence.
 
 The **master problem** selects facilities to open and introduces an **auxiliary variable** $ \eta_s $ to estimate subproblem costs.  
 
-'''math 
+```math
 \begin{aligned}
     & \text{minimize} \quad && \sum_{j \in J} f_j y_j + \frac{1}{|S|} \eta_s \\
     & \text{subject to} && \sum_{j \in J} u_j y_j \geq \max_{s \in S} \sum_{i \in I} d_{i,s}, \\
     &&& \eta_s \geq 0, \quad \forall s \in S \\
     &&& y_j \in \{0, 1\}, \quad \forall j \in J.
 \end{aligned}
-'''
+```
 
 This ensures enough capacity is available while keeping costs minimal.  
 
@@ -88,14 +88,14 @@ This ensures enough capacity is available while keeping costs minimal.
 
 For a given facility selection $ \bar{y} $, the **subproblem** optimally assigns demand, minimizing transportation costs:  
 
-'''math 
+```math
 \begin{aligned}
     \psi(\bar{y}) ={} & \min\ && \sum_{i \in I} \sum_{j \in J} c_{ij} x_{ij,s}\\
     & \text{s.t.} && \sum_{j \in J} x_{ij,s} \geq d_{i,s}, \quad \forall i \in I \\
     &&& \sum_{i \in I} x_{ij,s} \leq u_j \bar{y}_j, \quad \forall j \in J \\
     &&& x_{ij,s} \geq 0.
 \end{aligned}
-'''
+```
 
 If $ \psi_s^\ast(\bar{y}) $ exceeds \( \bar{\eta_s} \), an **optimality cut** is generated.  
 
@@ -103,9 +103,9 @@ If $ \psi_s^\ast(\bar{y}) $ exceeds \( \bar{\eta_s} \), an **optimality cut** is
 
 From the **dual of the subproblem**, the **optimality cut** is:  
 
-'''math 
+```math
 \eta_s \geq \sum_{i \in I} \mu^\ast_{i,s} d_{i,s} - \sum_{j \in J} \nu^\ast_{j,s} u_j y_j
-'''
+```
 
 These **cuts** are added iteratively, refining the master problem for faster convergence.  
 
